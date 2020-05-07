@@ -1,0 +1,17 @@
+name: material_clock
+description: Awesome material analog clock for your projects!
+version: 0.0.1
+#authors:
+#  - Richard Cooper <rcooper.xelaj@protonmail.com>
+homepage: https://github.com/xelaj/flutter_material_clock
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

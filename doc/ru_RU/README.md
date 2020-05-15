@@ -31,7 +31,7 @@ $ flutter pub get
 
 ## Как использовать
 
-**Примеры кода [здесь](https://github.com/xelaj/flutter_material_clock/blob/master/examples)**
+**Примеры кода [здесь](https://github.com/xelaj/flutter_material_clock/blob/master/example)**
 
 Базово, вам нужно проинициализировать виджет Clock и передать ему параметры:
 

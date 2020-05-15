@@ -1,7 +1,7 @@
 # 🕗 Material Clock 🕚
 
 ![help wanted](https://img.shields.io/badge/-help%20wanted-success)
-[![Pub Version](https://img.shields.io/pub/v/material_clock)](https://pub.dev/packages/github)
+[![Pub Version](https://img.shields.io/pub/v/material_clock)](https://pub.dev/packages/material_clock)
 [![license MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/xelaj/vk/blob/master/README.md)
 [![chat telegram](https://img.shields.io/badge/chat-telegram-0088cc)](https://bit.ly/2xlsVsQ)
 ![unstable](https://img.shields.io/badge/stability-unstable-yellow)
@@ -10,7 +10,7 @@
 
 Chic and awesome watch for your application!
 
-![preview](/doc/assets/example.gif)
+![preview](https://github.com/xelaj/flutter_material_clock/blob/master/doc/assets/example.gif)
 
 ## How to install
 
@@ -31,7 +31,7 @@ Voila! Installation is done!
 
 ## How to use
 
-**Code examples are [here](https://github.com/xelaj/flutter_material_clock/blob/master/examples)**
+**Code examples are [here](https://github.com/xelaj/flutter_material_clock/blob/master/example)**
 
 Basically, you jest need to create new widget, and set some parameters:
 

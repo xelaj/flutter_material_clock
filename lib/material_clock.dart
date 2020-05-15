@@ -3,6 +3,7 @@ library material_clock;
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:async';
+import './global_ticker.dart' as ticker;
 
 class Clock extends StatefulWidget {
   /// Size of your widget. By default it is `double.infinty`.
@@ -31,20 +32,36 @@ class Clock extends StatefulWidget {
   /// Note, that date is ignored, so you can set only specific time.
   final DateTime time;
 
+  // Timezone offset of this clock. For example, Duration(hour:-3, minute:30) is equal to "-3:30" zone
+  Duration timezoneOffset;
+
+  bool _needToAddOffset = false;
+
   /// Widget `Clock` implements simple and awesome material clock for your app!
-  const Clock({
-    this.time,
+  Clock({
+    @required this.time,
     this.size = double.infinity,
     this.secondHandColor = Colors.redAccent,
     this.live = false,
     this.theme = Brightness.light,
     this.backgroundStyle = PaintingStyle.fill,
     this.alignment = Alignment.center,
-    Key key,
-  }) : super(key: key);
+    this.timezoneOffset,
+  }) {
+    if (timezoneOffset != null) {
+      _needToAddOffset = true;
+    } else {
+      this.timezoneOffset = Duration.zero;
+    }
+    ;
+  }
 
   @override
-  _ClockState createState() => _ClockState(time: this.time);
+  _ClockState createState() => _ClockState(
+        time: _needToAddOffset
+            ? this.time.toUtc().add(this.timezoneOffset)
+            : this.time,
+      );
 }
 
 class _ClockState extends State<Clock> {
@@ -53,6 +70,11 @@ class _ClockState extends State<Clock> {
   _ClockState({
     @required this.time,
   });
+
+  @override
+  void initState() {
+    ticker.setupUpdating(update);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,32 +95,21 @@ class _ClockState extends State<Clock> {
     );
   }
 
-  Timer _timer;
-  @override
-  void initState() {
-    super.initState();
-    if (widget.live) {
-      _timer = Timer.periodic(Duration(seconds: 1), (Timer t) => update(t));
-    }
-    ;
-  }
-
   @override
   void dispose() {
     super.dispose();
-    _timer.cancel();
+    ticker.cancelUpdating(update);
   }
 
   update(Timer timer) {
     setState(() {
-      time = DateTime.now();
+      time = widget._needToAddOffset ? DateTime.now().toUtc() : DateTime.now();
+      time = time.add(widget.timezoneOffset);
     });
   }
 }
 
 class _ClockPainter extends CustomPainter {
-  static const tickLength = 10.0;
-  static const tickWidth = 1.0;
   static const hourRadius = 40.0;
   static const minuteRadius = 70.0;
   static const secondRadius = 80.0;
